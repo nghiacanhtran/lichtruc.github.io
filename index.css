@@ -1,15 +1,37 @@
 body {
   background: url("back_g.jpg") no-repeat center center fixed;
+  position: relative;
 }
 
 .wrapper_clock {
-  display: flex;
-  justify-content: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, 50%);
   padding: 10px;
 }
 
 .clock {
   background: #ffff;
   border-radius: 10px;
-  padding: 10px;
+  padding: 20px;
+}
+
+#date_instance .datepicker-inline {
+  width: 500px;
+  height: 300px;
+}
+
+#date_instance .datepicker-days,
+#date_instance .datepicker-months,
+#date_instance .datepicker-years,
+#date_instance .datepicker-decades,
+#date_instance .datepicker-centuries {
+  height: 100%;
+  width: 100%;
+}
+
+#date_instance .table-condensed {
+  height: 100%;
+  width: 100%;
 }
