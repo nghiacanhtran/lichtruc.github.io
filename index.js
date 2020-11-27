@@ -9,7 +9,7 @@ jQuery(document).ready(function () {
 var calculate = (function () {
   var config = () => {
     return {
-      dateRoot: new Date(2020, 11, 18),
+      dateRoot: new Date(2020, 11, 6),
       numberBetweenTwoWeek: 6,
     };
   };
@@ -19,33 +19,29 @@ var calculate = (function () {
   };
 
   let getMondays = () => {
-    var d = new Date(),
-      month = d.getMonth(),
-      mondays = [];
+    var mondays = [];
 
-    d.setDate(1);
-
-    // Get the first Monday in the month
-    while (d.getDay() !== 1) {
-      d.setDate(d.getDate() + 1);
+    var monday = moment().startOf("month").day("Monday");
+    if (monday.date() > 7) {
+      monday.add(7, "d");
     }
+    var month = monday.month();
+    while (month === monday.month()) {
+      mondays.push(new Date(monday.toDate()));
 
-    // Get all the other Mondays in the month
-    while (d.getMonth() === month) {
-      mondays.push(new Date(d.getTime()));
-      d.setDate(d.getDate() + 7);
+      monday.add(7, "d");
     }
-
+    console.log(mondays);
     return mondays;
   };
 
   let getArrDate = () => {
     var listMonDays = getMondays();
     var arrDayPick = [];
+
     listMonDays.forEach((element) => {
       let distanceWeek = getWeeksBetween(element, config().dateRoot) - 1;
       let distanceDate = distanceWeek * config().numberBetweenTwoWeek;
-
       element.setDate(config().dateRoot.getDate() + distanceDate);
       arrDayPick.push(element);
     });
@@ -55,7 +51,7 @@ var calculate = (function () {
     // let distanceDate = distanceWeek * config().numberBetweenTwoWeek;
     // tomorrow.setDate(config().dateRoot.getDate() + distanceDate);
     // return tomorrow;
-    console.log(arrDayPick);
+
     return arrDayPick;
   };
 
